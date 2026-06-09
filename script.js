@@ -61,6 +61,30 @@ const filters={
     },
 }
 
-function createFilterElement(name,unit="%",valu,min,max){
+const filtersContainer=document.querySelector(".filters")
 
+function createFilterElement(name, unit="%", value, min, max){
+ let div=document.createElement("div")
+
+ div.classList.add("filter")
+
+const input=document.createElement("input");
+input.type="range"
+input.min=min
+input.max=max
+input.value=value
+input.id=name
+
+const p=document.createElement("p");
+p.innerText=name
+
+div.appendChild(p)
+div.appendChild(input)
+
+return div
 }
+
+Object.keys(filters).forEach(key=>{
+const filterElement= createFilterElement(key,filters[key].unit, filters[key].value, filters[key].min , filters[key].max)
+filtersContainer.appendChild(filterElement)
+})
